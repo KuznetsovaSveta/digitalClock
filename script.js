@@ -32,14 +32,24 @@ window.addEventListener('load', () => {
     })
 
     let clock = document.querySelector('.clock');
+    let clockItems = document.querySelectorAll('.clock__item');
     let inputTextColor = document.querySelector('#textColor');
     let inputBackgroundColor = document.querySelector('#backgroundColor');
+    let inputBlocksColor = document.querySelector('#blocksColor');
+
 
     inputTextColor.addEventListener('input', () => {
         clock.style.color = inputTextColor.value;
     });
     inputBackgroundColor.addEventListener('input', () => {
         clock.style.background = inputBackgroundColor.value;
+        menuWrapper.style.borderColor = inputBackgroundColor.value;
+    });
+    inputBlocksColor.addEventListener('input', () => {
+        menuWrapper.style.background = inputBlocksColor.value;
+        clockItems.forEach((clockItem) => {
+            clockItem.style.background = inputBlocksColor.value;
+        })
     });
 });
 
