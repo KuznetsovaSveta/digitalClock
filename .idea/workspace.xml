@@ -5,21 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d0bf2f25-2994-44f4-8589-48c6af45c29d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/android-chrome-192x192.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android-chrome-512x512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apple-touch-icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/browserconfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/favicon-16x16.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/favicon-32x32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mstile-144x144.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mstile-150x150.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mstile-310x150.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mstile-310x310.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mstile-70x70.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +91,7 @@
       <updated>1698068408473</updated>
       <workItem from="1698068410973" duration="14623000" />
       <workItem from="1698145538991" duration="356000" />
-      <workItem from="1698146017248" duration="233000" />
+      <workItem from="1698146017248" duration="553000" />
     </task>
     <servers />
   </component>
