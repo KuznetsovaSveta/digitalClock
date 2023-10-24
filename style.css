@@ -1,9 +1,10 @@
-body{
+body {
     margin: 0;
     padding: 0;
     font-family: 'Montserrat', sans-serif;
 }
-.clock{
+
+.clock {
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -15,19 +16,22 @@ body{
     padding: 0 20px;
     box-sizing: border-box;
 }
-.clock__date{
+
+.clock__date {
     text-align: center;
     margin: 0 0 48px;
     font-size: 24px;
 }
-.clock__items{
+
+.clock__items {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 880px;
     max-width: 100%;
 }
-.clock__item, .clock__separator{
+
+.clock__item, .clock__separator {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -36,30 +40,36 @@ body{
     /*margin-right: 24px;*/
     margin-right: 12px;
 }
-.clock__item{
+
+.clock__item {
     max-width: 240px;
     height: 240px;
     flex: 1;
     border-radius: 12px;
     background: #2B2B2E;
 }
-.clock__item:last-child{
+
+.clock__item:last-child {
     margin-right: 0;
 }
-.clock__quote{
+
+.clock__quote {
     text-align: center;
     margin: 48px 0 0;
     font-size: 24px;
 }
-.menu{
+
+.menu {
     position: absolute;
     right: 48px;
     bottom: 48px;
 }
-.menu__btn{
+
+.menu__btn {
     cursor: pointer;
 }
-.menu__wrapper{
+
+.menu__wrapper {
     opacity: 0;
     position: absolute;
     bottom: 34px;
@@ -71,53 +81,83 @@ body{
     transition: 0.2s ease opacity;
     border: 1px solid #1A1A1D;
 }
-.menu__wrapper.active{
+
+.menu__wrapper.active {
     opacity: 1;
 }
-.menu__item{
+
+.menu__item {
     display: flex;
     align-items: center;
     margin-bottom: 8px;
 }
-.menu__item:last-child{
+
+.menu__item:last-child {
     margin-bottom: 0;
 }
-.menu__input{
+
+.menu__input {
     width: 24px;
     height: 24px;
     border: 0;
-    appearance: none;
+    appearance: unset;
     padding: 0;
     padding-block: 0;
     padding-inline: 0;
     background-color: transparent;
-    margin-right: 4px;
+    margin-right: 6px;
     cursor: pointer;
+    border-radius: 50%;
 }
-.clock__menu svg{
+
+.menu__input[type="color"] {
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid #66fcf1;
+}
+
+.menu__input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+    border-radius: 50%;
+}
+
+.menu__input[type="color"]::-webkit-color-swatch {
+    border: none;
+    border-radius: 50%;
+}
+
+.clock__menu svg {
     width: 24px;
     height: 24px;
     fill: currentColor;
 }
-@media(max-width: 768px){
-    .clock__item{
+
+@media (max-width: 768px) {
+    .clock__item {
         height: 200px;
     }
-    .clock__item, .clock__separator{
+
+    .clock__item, .clock__separator {
         font-size: 90px;
     }
-    .clock__title{
+
+    .clock__title {
         margin: 0 0 24px;
     }
-    .clock__quote{
+
+    .clock__quote {
         margin: 24px 0 0;
     }
 }
-@media(max-width: 576px){
-    .clock__item{
+
+@media (max-width: 576px) {
+    .clock__item {
         height: 140px;
     }
-    .clock__item, .clock__separator{
+
+    .clock__item, .clock__separator {
         font-size: 55px;
         margin-right: 8px;
     }

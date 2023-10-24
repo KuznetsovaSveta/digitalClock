@@ -11,14 +11,14 @@ window.addEventListener('load', () => {
 
         let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-        document.querySelector('.clock__date-num').innerHTML = num + '.';
-        document.querySelector('.clock__date-month').innerHTML = month + '.';
+        document.querySelector('.clock__date-num').innerHTML = num < 10 ? '0' + num + '.' : num + '.';
+        document.querySelector('.clock__date-month').innerHTML = month < 10 ? '0' + month + '.' : month + '.';
         document.querySelector('.clock__date-year').innerHTML = year;
         document.querySelector('.clock__date-day').innerHTML = days[day];
 
-        document.querySelector('.clock__item-hours').innerHTML = hours;
-        document.querySelector('.clock__item-minutes').innerHTML = minutes;
-        document.querySelector('.clock__item-seconds').innerHTML = seconds;
+        document.querySelector('.clock__item-hours').innerHTML = hours < 10 ? '0' + hours : hours;
+        document.querySelector('.clock__item-minutes').innerHTML = minutes < 10 ? '0' + minutes : minutes;
+        document.querySelector('.clock__item-seconds').innerHTML = seconds < 10 ? '0' + seconds : seconds;
 
         setTimeout(calculateTime, 100);
     }
@@ -26,6 +26,7 @@ window.addEventListener('load', () => {
 
     let menuBtn = document.querySelector('.menu__btn');
     let menuWrapper = document.querySelector('.menu__wrapper');
+    let menuInputs = document.querySelectorAll('.menu__input');
 
     menuBtn.addEventListener('click', () => {
         menuWrapper.classList.toggle('active')
@@ -40,6 +41,9 @@ window.addEventListener('load', () => {
 
     inputTextColor.addEventListener('input', () => {
         clock.style.color = inputTextColor.value;
+        menuInputs.forEach((menuInput) => {
+            menuInput.style.borderColor = inputTextColor.value;
+        })
     });
     inputBackgroundColor.addEventListener('input', () => {
         clock.style.background = inputBackgroundColor.value;
