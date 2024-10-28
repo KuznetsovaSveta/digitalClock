@@ -8,7 +8,6 @@ window.addEventListener('load', () => {
         let hours = currentDate.getHours();
         let minutes = currentDate.getMinutes();
         let seconds = currentDate.getSeconds();
-
         let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
         document.querySelector('.clock__date-num').innerHTML = num < 10 ? '0' + num + '.' : num + '.';
@@ -27,33 +26,58 @@ window.addEventListener('load', () => {
     let menuBtn = document.querySelector('.menu__btn');
     let menuWrapper = document.querySelector('.menu__wrapper');
     let menuInputs = document.querySelectorAll('.menu__input');
-
-    menuBtn.addEventListener('click', () => {
-        menuWrapper.classList.toggle('active')
-    })
-
     let clock = document.querySelector('.clock');
     let clockItems = document.querySelectorAll('.clock__item');
     let inputTextColor = document.querySelector('#textColor');
     let inputBackgroundColor = document.querySelector('#backgroundColor');
     let inputBlocksColor = document.querySelector('#blocksColor');
 
+    //работа с localsorage
+    let localTextColor = localStorage.getItem('textColor');
+    let localBgColor = localStorage.getItem('bgColor');
+    let localBlocksColor = localStorage.getItem('blocksColor');
+    if(localTextColor){
+        clock.style.color = localTextColor;
+        menuInputs.forEach((menuInput) => {
+            menuInput.style.borderColor = localTextColor;
+        })
+    }
+    if(localBgColor){
+        clock.style.background = localBgColor;
+        menuWrapper.style.borderColor = localBgColor;
+    }
+    if(localBlocksColor){
+        menuWrapper.style.background = localBlocksColor;
+        clockItems.forEach((clockItem) => {
+            clockItem.style.background = localBlocksColor;
+        })
+    }
+
+
+    menuBtn.addEventListener('click', () => {
+        menuWrapper.classList.toggle('active')
+    });
 
     inputTextColor.addEventListener('input', () => {
         clock.style.color = inputTextColor.value;
         menuInputs.forEach((menuInput) => {
             menuInput.style.borderColor = inputTextColor.value;
         })
+        localStorage.setItem('textColor', inputTextColor.value);
     });
+
     inputBackgroundColor.addEventListener('input', () => {
         clock.style.background = inputBackgroundColor.value;
         menuWrapper.style.borderColor = inputBackgroundColor.value;
+        localStorage.setItem('bgColor', inputBackgroundColor.value);
     });
+
     inputBlocksColor.addEventListener('input', () => {
         menuWrapper.style.background = inputBlocksColor.value;
         clockItems.forEach((clockItem) => {
             clockItem.style.background = inputBlocksColor.value;
         })
+        localStorage.setItem('blocksColor', inputBlocksColor.value);
     });
 });
 
