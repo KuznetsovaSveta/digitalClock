@@ -80,16 +80,21 @@ body {
     border-radius: 8px;
     transition: 0.2s ease opacity;
     border: 1px solid #1A1A1D;
+    pointer-events: none;
 }
 
 .menu__wrapper.active {
     opacity: 1;
+    pointer-events: all;
 }
 
 .menu__item {
     display: flex;
     align-items: center;
     margin-bottom: 8px;
+}
+.menu__item-textarea{
+    flex-wrap: wrap;
 }
 
 .menu__item:last-child {
@@ -116,6 +121,18 @@ body {
     height: 24px;
     border-radius: 50%;
     border: 1px solid #66fcf1;
+}
+.menu__textarea{
+    background: transparent;
+    border: 1px solid;
+    border-radius: 4px;
+    width: 100%;
+    outline: none;
+    margin-top: 6px;
+    padding: 5px;
+    height: auto;
+    cursor: text;
+    resize: none;
 }
 
 .menu__input[type="color"]::-webkit-color-swatch-wrapper {

@@ -1,83 +1,104 @@
 window.addEventListener('load', () => {
-    function calculateTime() {
-        let currentDate = new Date();
-        let year = currentDate.getFullYear();
-        let month = currentDate.getMonth() + 1;
-        let day = currentDate.getDay();
-        let num = currentDate.getDate();
-        let hours = currentDate.getHours();
-        let minutes = currentDate.getMinutes();
-        let seconds = currentDate.getSeconds();
-        let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
-        document.querySelector('.clock__date-num').innerHTML = num < 10 ? '0' + num + '.' : num + '.';
-        document.querySelector('.clock__date-month').innerHTML = month < 10 ? '0' + month + '.' : month + '.';
-        document.querySelector('.clock__date-year').innerHTML = year;
-        document.querySelector('.clock__date-day').innerHTML = days[day];
-
-        document.querySelector('.clock__item-hours').innerHTML = hours < 10 ? '0' + hours : hours;
-        document.querySelector('.clock__item-minutes').innerHTML = minutes < 10 ? '0' + minutes : minutes;
-        document.querySelector('.clock__item-seconds').innerHTML = seconds < 10 ? '0' + seconds : seconds;
-
-        setTimeout(calculateTime, 100);
-    }
-    calculateTime()
-
-    let menuBtn = document.querySelector('.menu__btn');
-    let menuWrapper = document.querySelector('.menu__wrapper');
-    let menuInputs = document.querySelectorAll('.menu__input');
-    let clock = document.querySelector('.clock');
-    let clockItems = document.querySelectorAll('.clock__item');
-    let inputTextColor = document.querySelector('#textColor');
-    let inputBackgroundColor = document.querySelector('#backgroundColor');
-    let inputBlocksColor = document.querySelector('#blocksColor');
-
-    //работа с localsorage
-    let localTextColor = localStorage.getItem('textColor');
-    let localBgColor = localStorage.getItem('bgColor');
-    let localBlocksColor = localStorage.getItem('blocksColor');
-    if(localTextColor){
-        clock.style.color = localTextColor;
-        menuInputs.forEach((menuInput) => {
-            menuInput.style.borderColor = localTextColor;
-        })
-    }
-    if(localBgColor){
-        clock.style.background = localBgColor;
-        menuWrapper.style.borderColor = localBgColor;
-    }
-    if(localBlocksColor){
-        menuWrapper.style.background = localBlocksColor;
-        clockItems.forEach((clockItem) => {
-            clockItem.style.background = localBlocksColor;
-        })
+    function formatNumber(num) {
+        return num < 10 ? '0' + num : num;
     }
 
+    function updateClock() {
+        const currentDate = new Date();
+        const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+        document.querySelector('.clock__date-num').textContent = formatNumber(currentDate.getDate()) + '.';
+        document.querySelector('.clock__date-month').textContent = formatNumber(currentDate.getMonth() + 1) + '.';
+        document.querySelector('.clock__date-year').textContent = currentDate.getFullYear();
+        document.querySelector('.clock__date-day').textContent = days[currentDate.getDay()];
+
+        document.querySelector('.clock__item-hours').textContent = formatNumber(currentDate.getHours());
+        document.querySelector('.clock__item-minutes').textContent = formatNumber(currentDate.getMinutes());
+        document.querySelector('.clock__item-seconds').textContent = formatNumber(currentDate.getSeconds());
+
+        setTimeout(updateClock, 1000); // Update every second
+    }
+    updateClock();
+
+    const menuBtn = document.querySelector('.menu__btn');
+    const menuWrapper = document.querySelector('.menu__wrapper');
+    const menuInputs = document.querySelectorAll('.menu__input');
+    const clock = document.querySelector('.clock');
+    const clockItems = document.querySelectorAll('.clock__item');
+    const inputTextColor = document.querySelector('#textColor');
+    const inputBackgroundColor = document.querySelector('#backgroundColor');
+    const inputBlocksColor = document.querySelector('#blocksColor');
+    const quote = document.querySelector('#quote');
+    const editText = document.querySelector('#textContent');
+
+    // Load colors from localStorage
+    const colors = {
+        textColor: localStorage.getItem('textColor'),
+        bgColor: localStorage.getItem('backgroundColor'),
+        blocksColor: localStorage.getItem('blocksColor'),
+    };
+    const textContentLocal = localStorage.getItem('textContent');
+
+    if (colors.textColor) {
+        clock.style.color = colors.textColor;
+        menuInputs.forEach(input => {
+            input.style.borderColor = colors.textColor;
+            input.style.color = colors.textColor;
+        });
+        inputTextColor.value = colors.textColor;
+    }
+    if (colors.bgColor) {
+        clock.style.background = colors.bgColor;
+        menuWrapper.style.borderColor = colors.bgColor;
+        inputBackgroundColor.value = colors.bgColor;
+    }
+    if (colors.blocksColor) {
+        menuWrapper.style.background = colors.blocksColor;
+        clockItems.forEach(item => item.style.background = colors.blocksColor);
+        inputBlocksColor.value = colors.blocksColor;
+    }
+    if (textContentLocal) {
+        editText.value = textContentLocal;
+        quote.textContent = textContentLocal;
+    }
 
     menuBtn.addEventListener('click', () => {
-        menuWrapper.classList.toggle('active')
+        menuWrapper.classList.toggle('active');
     });
+    document.addEventListener('mousedown', (e) => {
+        if (!menuWrapper.contains(e.target) && !menuBtn.contains(e.target)) {
+            menuWrapper.classList.remove('active');
+        }
+    })
+
+    function updateColor(input, styleProperty, elements) {
+        const colorValue = input.value;
+        if(input != inputBlocksColor) clock.style[styleProperty] = colorValue;
+        if(input == inputTextColor){
+            menuInputs.forEach(menuInput => menuInput.style.borderColor = colorValue);
+        }
+        if (elements) {
+            elements.forEach(element => element.style[styleProperty] = colorValue);
+            console.log(elements)
+        }
+        input.style[styleProperty] = colorValue;
+        localStorage.setItem(input.id, colorValue);
+    }
 
     inputTextColor.addEventListener('input', () => {
-        clock.style.color = inputTextColor.value;
-        menuInputs.forEach((menuInput) => {
-            menuInput.style.borderColor = inputTextColor.value;
-        })
-        localStorage.setItem('textColor', inputTextColor.value);
+        updateColor(inputTextColor, 'color', menuInputs);
     });
 
     inputBackgroundColor.addEventListener('input', () => {
-        clock.style.background = inputBackgroundColor.value;
-        menuWrapper.style.borderColor = inputBackgroundColor.value;
-        localStorage.setItem('bgColor', inputBackgroundColor.value);
+        updateColor(inputBackgroundColor, 'background', [menuWrapper]);
     });
 
     inputBlocksColor.addEventListener('input', () => {
-        menuWrapper.style.background = inputBlocksColor.value;
-        clockItems.forEach((clockItem) => {
-            clockItem.style.background = inputBlocksColor.value;
-        })
-        localStorage.setItem('blocksColor', inputBlocksColor.value);
+        updateColor(inputBlocksColor, 'background', clockItems);
+    });
+
+    editText.addEventListener('input', () => {
+        quote.textContent = editText.value;
+        localStorage.setItem('textContent', editText.value);
     });
 });
-
